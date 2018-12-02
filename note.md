@@ -1,0 +1,2 @@
+# Webpack
+1、`webpack`默认会`build` `src/index.js`，如果想`build`其他文件，`webpack [<entry>]`，如果有config文件，可以`webpack <entry> --config <config>`，如果指定出口位置`webpack <entry> --config <config> -o <output>`，`webpack -h`会有帮助文档，[官方文档](:https://webpack.js.org/api/cli/)，不过通常的做法是将脚本语句放在`package.json`里面去执行，如：`"build": "webpack --config build/webpack.config.js"`
