@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: '[name].[hash].js',
     path: path.join(__dirname, '../dist'),
-    publicPath: ''
+    publicPath: '/public'
   },
   module: {
     rules: [
@@ -26,6 +26,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new HTMLPlugin() // 打开 html 页面，并把相关 script 注入页面
+    new HTMLPlugin({
+      template: path.join(__dirname, '../client/template.html')
+    }) // 打开 html 页面，并把相关 script 注入页面
   ]
 }
