@@ -22,3 +22,11 @@ server配置负责将`app.jsx`作为入口打包到`dist`里面的的`server-ent
 
 总结：
 > 正常打包客户端代码，将`App.jsx`根元素部分用`server`端生成的代码替换。实现了由`html(根元素)+app.js` -> `html(页面)+app.js`
+
+2.6 Webpack-dev-server配置
+webpack-dev-server 开启node服务，把文件存在内存中(文件内容发生变化，浏览器自动刷新)
+hot module replacement 热更替(页面不刷新)
+`webpack-dev-server`的配置是`devServer`, [文档](https://webpack.docschina.org/configuration/dev-server/#devserver)
+`contentBase`的意思是在哪个目录下开启`node`服务，但是这个目录不一定是真实的物理地址，它只是在内存的地址。但是如果一样的路径下有真实的目录存在，`webpack`默认取物理地址下的目录。(所以写完devServer的配置最好删除一下`dist`目录)
+`devServer`的`publicPath`和`output`的`publicPath`路径要一致，他们都表示静态资源的访问位置。(可以理解为`webpack`在内存中生成一个`dist`目录，`dist`中的静态资源(如: `app.[hash].js`)在`/public`的访问路径下面。)，用于区分静态资源请求和API请求。
+`historyApiFallback`表示任意的404响应都可能需要被替代为 index.html。

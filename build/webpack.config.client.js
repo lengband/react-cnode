@@ -1,7 +1,10 @@
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 
-module.exports = {
+const isDev = process.env.NODE_ENV === 'development'
+
+const config = {
+  mode: 'production',
   entry: {
     app: path.join(__dirname, '../client/app.js')
   },
@@ -31,3 +34,22 @@ module.exports = {
     }) // 打开 html 页面，并把相关 script 注入页面
   ]
 }
+
+if (isDev) {
+  config.mode = 'development'
+  config.devServer = {
+    host: '0.0.0.0',
+    port: '8888',
+    contentBase: path.join(__dirname, '../dist'),
+    // hot: true,
+    overlay: {
+      errors: true
+    },
+    publicPath: '/public',
+    historyApiFallback: {
+      index: '/public/index.html'
+    }
+  }
+}
+
+module.exports = config
