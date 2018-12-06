@@ -30,3 +30,43 @@ hot module replacement 热更替(页面不刷新)
 `contentBase`的意思是在哪个目录下开启`node`服务，但是这个目录不一定是真实的物理地址，它只是在内存的地址。但是如果一样的路径下有真实的目录存在，`webpack`默认取物理地址下的目录。(所以写完devServer的配置最好删除一下`dist`目录)
 `devServer`的`publicPath`和`output`的`publicPath`路径要一致，他们都表示静态资源的访问位置。(可以理解为`webpack`在内存中生成一个`dist`目录，`dist`中的静态资源(如: `app.[hash].js`)在`/public`的访问路径下面。)，用于区分静态资源请求和API请求。
 `historyApiFallback`表示任意的404响应都可能需要被替代为 index.html。
+
+2.6 hot-module-replacement
+1、在`.babelrc`里面添加
+```
+ "plugins": [ "react-hot-loader/babel" ]
+ ```
+ 2、`devServer`中的 `hot: true`打开
+ 3、在`webpack.config.js` 添加 `react-hot-loader/patch` 
+ ```
+ 'react-hot-loader/patch', // RHL patch
+  path.join(__dirname, '../client/app.js') // Your appʼs entry point
+ ```
+ 4、用`AppContainer`包裹根节点
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import { AppContainer } from 'react-hot-loader';
+import RootContainer from './containers/rootContainer';
+
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('root')
+  );
+}
+
+render(RootContainer);
+
+if (module.hot) {
+  module.hot.accept('./containers/rootContainer.js', () => {
+    const NextRootContainer = require('./containers/rootContainer').default;
+    render(NextRootContainer);
+  });
+}
+```
+坑：不要在 `package.json` 的 `webpack-dev-server`中加上`--hot`（亲测：加了之后热加载不生效）
+react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#step-2-of-3-using-hmr-to-replace-the-root-component)
