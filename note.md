@@ -79,3 +79,6 @@ react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#
 > 2、引入 memoryfs, 在内存中读取出口文件，并打包成一个 bundle
 > 3、将 /public 的静态请求代理回 dev:client 的 /public 路径
 > 4、将 模板 内容替换成在内存中打包出来的文件(server-entry.js)
+
+2.9
+// 使用一些 node 的环境变量
