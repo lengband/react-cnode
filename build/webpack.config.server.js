@@ -1,6 +1,8 @@
 const path = require('path')
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
+  mode: `${isDev ? "development" : "production"}`,
   target: 'node',
   entry: {
     app: path.join(__dirname, '../client/server-entry.js')
@@ -8,7 +10,7 @@ module.exports = {
   output: {
     filename: 'server-entry.js',
     path: path.join(__dirname, '../dist'),
-    publicPath: '/public',
+    publicPath: '/public/',
     libraryTarget: 'commonjs2'
   },
   module: {

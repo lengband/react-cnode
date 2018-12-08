@@ -31,7 +31,7 @@ hot module replacement 热更替(页面不刷新)
 `devServer`的`publicPath`和`output`的`publicPath`路径要一致，他们都表示静态资源的访问位置。(可以理解为`webpack`在内存中生成一个`dist`目录，`dist`中的静态资源(如: `app.[hash].js`)在`/public`的访问路径下面。)，用于区分静态资源请求和API请求。
 `historyApiFallback`表示任意的404响应都可能需要被替代为 index.html。
 
-2.6 hot-module-replacement
+2.7 hot-module-replacement
 1、在`.babelrc`里面添加
 ```
  "plugins": [ "react-hot-loader/babel" ]
@@ -70,3 +70,12 @@ if (module.hot) {
 ```
 坑：不要在 `package.json` 的 `webpack-dev-server`中加上`--hot`（亲测：加了之后热加载不生效）
 react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#step-2-of-3-using-hmr-to-replace-the-root-component)
+
+2-8 开发时的服务端渲染(既：当没有`dist`目录时的服务端渲染)
+启动命令：yarn dev:server
+执行文件：server/util/dev-static.js
+思路：
+> 1、将 webpack.config.server 配置打包编译
+> 2、引入 memoryfs, 在内存中读取出口文件，并打包成一个 bundle
+> 3、将 /public 的静态请求代理回 dev:client 的 /public 路径
+> 4、将 模板 内容替换成在内存中打包出来的文件(server-entry.js)
