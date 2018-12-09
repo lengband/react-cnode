@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import App from './App.jsx'
+import App from './views/App'
 
 /*
  生产环境(如果开发环境用这个，react-dom 会报警告
@@ -28,7 +28,7 @@ render(App)
 
 if (module.hot) {
   module.hot.accept('./App.jsx', () => {
-    const NextApp = require('./App.jsx').default
+    const NextApp = require('./views/App.jsx').default
     render(NextApp)
   })
 }
