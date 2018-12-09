@@ -90,3 +90,15 @@ react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#
 合并 webpack 基本配置 -> webpack.base.js
 nodemon.json 给nodemon提供配置
 serve-favicon 在服务端添加 favicon
+
+3.1
+目录结构
+
+3.2
+在模块化引入时，`webpack` 会默认引入js，如 `import App from './client/views/App'`
+想让 `webpack`理解成`jsx`，加入
+```
+resolve: {
+  extensions: ['.js', '.jsx']
+}
+```
