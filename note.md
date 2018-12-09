@@ -37,7 +37,7 @@ hot module replacement 热更替(页面不刷新)
  "plugins": [ "react-hot-loader/babel" ]
  ```
  2、`devServer`中的 `hot: true`打开
- 3、在`webpack.config.js` 添加 `react-hot-loader/patch` 
+ 3、在`webpack.config.js` 添加 `react-hot-loader/patch`
  ```
  'react-hot-loader/patch', // RHL patch
   path.join(__dirname, '../client/app.js') // Your appʼs entry point
@@ -81,4 +81,7 @@ react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#
 > 4、将 模板 内容替换成在内存中打包出来的文件(server-entry.js)
 
 2.9
-// 使用一些 node 的环境变量
+> webpack-merge 将相同配置出来放在 base 里面
+> husky：Husky can prevent bad git commit, git push
+> serve-favicon 将 /favicon 配置到 本地 ico
+> nodemon 监听 server 文件自启动（配置文件：nodemon.json）

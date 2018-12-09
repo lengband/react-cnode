@@ -9,5 +9,5 @@ import React from 'react'
 // }
 
 export default () => (
-  <div>hello reac1t</div>
+  <div>hello react12</div>
 )

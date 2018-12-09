@@ -1,47 +1,24 @@
 const path = require('path')
 const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base.js')
 const HTMLPlugin = require('html-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
-const config = {
+const config = webpackMerge(baseConfig, {
   mode: 'production',
   entry: {
     app: path.join(__dirname, '../client/app.js')
   },
   output: {
-    filename: '[name].[hash].js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/public/'
-  },
-  module: {
-    rules: [
-      {
-        test: /.(js|jsx)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        exclude: [
-          path.resolve(__dirname, '../node_modules')
-        ]
-      },
-      {
-        test: /.jsx$/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /.js$/,
-        loader: 'babel-loader',
-        exclude: [
-          path.join(__dirname, '../node_modules')
-        ]
-      }
-    ]
+    filename: '[name].[hash].js'
   },
   plugins: [
     new HTMLPlugin({
       template: path.join(__dirname, '../client/template.html')
     }) // 打开 html 页面，并把相关 script 注入页面
   ]
-}
+})
 
 if (isDev) {
   config.entry = {
