@@ -102,3 +102,6 @@ resolve: {
   extensions: ['.js', '.jsx']
 }
 ```
+
+3.4 3.4
+搭建 store -> (mobx)[https://cn.mobx.js.org/]

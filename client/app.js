@@ -1,8 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'mobx-react'
 import { AppContainer } from 'react-hot-loader'
 import App from './views/App'
+import appState from './store/app-state'
 
 /*
  生产环境(如果开发环境用这个，react-dom 会报警告
@@ -18,11 +20,13 @@ import App from './views/App'
 const root = document.getElementById('root')
 const render = (Component) => {
   ReactDOM.render(
-    <BrowserRouter>
-      <AppContainer>
-        <Component />
-      </AppContainer>
-    </BrowserRouter>,
+    <AppContainer>
+      <BrowserRouter>
+        <Provider appState={appState}>
+          <Component />
+        </Provider>
+      </BrowserRouter>
+    </AppContainer>,
     root,
   )
 }
