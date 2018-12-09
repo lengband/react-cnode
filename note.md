@@ -85,3 +85,8 @@ react-hot-loader [文档](http://gaearon.github.io/react-hot-loader/getstarted/#
 > husky：Husky can prevent bad git commit, git push
 > serve-favicon 将 /favicon 配置到 本地 ico
 > nodemon 监听 server 文件自启动（配置文件：nodemon.json）
+
+2.10
+合并 webpack 基本配置 -> webpack.base.js
+nodemon.json 给nodemon提供配置
+serve-favicon 在服务端添加 favicon
